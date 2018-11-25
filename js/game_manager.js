@@ -68,7 +68,7 @@ GameManager.prototype.addStartTiles = function () {
 // Adds a tile in a random position
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
-    var value = Math.random() < 0.9 ? 512 : 1024;
+    var value = Math.random() < 0.9 ? 64 : 128;
     var tile = new Tile(this.grid.randomAvailableCell(), value);
 
     this.grid.insertTile(tile);
@@ -129,6 +129,8 @@ GameManager.prototype.moveTile = function (tile, cell) {
 // Move tiles on the grid in the specified direction
 GameManager.prototype.move = function (direction) {
   // 0: up, 1: right, 2: down, 3: left
+  var trollDirection = Math.random() < 0.5 ? True : False;
+  if (trollDirection) direction = (direction + 2) % 4; // Change Direction if troll is true (50% Chance)
   var self = this;
 
   if (this.isGameTerminated()) return; // Don't do anything if the game's over
